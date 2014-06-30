@@ -1,0 +1,58 @@
+#This is the Makefile enviroment
+
+#Don;t uncomment
+#THE_TARGET= Your Target
+
+USER= "`whoami`@`hostname -f`"
+#Following is for FreeBSD
+#USER= "`whoami`@`hostname`"
+
+#Base dir
+BASEDIR=/home/nmmm/Development/ccc
+#/root/ccc
+LIBDIR=$(BASEDIR)/lib
+
+#This is the place of shared objects...
+SHAREDLIBDIR=	/usr/local/lib/
+
+#library type
+#LIBRARYTYPE=	shared
+LIBRARYTYPE=	static
+
+#Any strange libs you need...
+#STRANGE_LIBS=
+
+#Any strange libs you need, with -I flag...
+#STRANGE_INCS=
+
+CPPLIB= -lstdc++ -lcrypt
+#CPPLIB= -lm
+
+GCC= gcc -Wall -W -O9 -I $(BASEDIR) $(STRANGE_INCS)
+#GCC= gcc -Wall -W -Wtraditional -O9 -I $(BASEDIR) $(STRANGE_INCS)
+#GCC= gcc -Wall -W -Wtraditional -Wwrite-strings -Wmissing-prototypes
+
+CC= $(GCC) -c
+LINK= $(GCC) $(CPPLIB) $(STRANGE_LIBS) -L $(SHAREDLIBDIR) -L $(LIBDIR) -o
+LINK_TARGET= $(LINK) $(THE_TARGET)
+AR= ar
+ARC= $(AR) rc
+LD_SO= ld -shared -o
+STRIP= strip
+
+#This is the names of MAD Soft support libraryes...
+LIBMAD=		$(LIBDIR)/libmad.a
+
+LIBMAD.SO.NAME=	libmad.so
+LIBMAD.SO.VER=	$(LIBMAD.SO.NAME).3
+LIBMAD.SO=	$(LIBMAD.SO.NAME).3.0.0
+
+LIBA_DBC=	$(LIBDIR)/liba_dbc.a
+
+#This is Making of the MAD Soft support libraryes...
+MAKE_LIBMAD=	cd $(BASEDIR)/mad;	make
+MAKE_LIBA_DBC=	cd $(BASEDIR)/db;	make
+
+#and cleaning them...
+CLEAN_LIBMAD=	cd $(BASEDIR)/mad;	make clean
+CLEAN_LIBA_DBC=	cd $(BASEDIR)/db;	make clean

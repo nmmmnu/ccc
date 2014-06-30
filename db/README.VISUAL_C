@@ -1,0 +1,4 @@
+Rename/Move file:
+	<root>\db\win\mfc\mfc_dbc.cpp
+to
+	<root>\db\a_dbc.cpp

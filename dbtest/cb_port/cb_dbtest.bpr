@@ -1,0 +1,170 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+PROJECT = cb_dbtest.exe
+OBJFILES = cb_dbtest.obj ..\..\DB\DBC\MS_WIN\bde_dbc.obj ..\..\MAD\Coder.obj ..\..\MAD\Macro.obj ..\..\MAD\Mad.obj ..\..\MAD\parsers.obj \
+  ..\..\MAD\Prop.obj ..\..\MAD\Textfile.obj ..\Dbtest.obj
+RESFILES =
+RESDEPEN = $(RESFILES)
+LIBFILES =
+LIBRARIES = vcldb35.lib vcl35.lib
+SPARELIBS = vcl35.lib vcldb35.lib
+PACKAGES = VCLX35.bpi VCL35.bpi VCLDB35.bpi VCLDBX35.bpi bcbsmp35.bpi dclocx35.bpi ibsmp35.bpi nmfast35.bpi
+DEFFILE =
+# ---------------------------------------------------------------------------
+PATHCPP = .;..\..\DB\DBC\MS_WIN;..\..\MAD;..\..\DBTEST
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+# ---------------------------------------------------------------------------
+CFLAG1 = -Od -Hc -w -Ve -r- -k -y -v -vi- -c -b- -w-par -w-inl -Vx -tWC
+CFLAG2 = -I"..\..\..\program files\borland\cbuilder3\projects";..\..\dbtest;..\..\mad;..\..\db\dbc\ms_win;$(BCB)\include;$(BCB)\include\vcl \
+  -H=$(BCB)\lib\vcl35.csm
+CFLAG3 = -Tkh30000
+PFLAGS = -U"..\..\..\program files\borland\cbuilder3\projects";..\..\dbtest;..\..\mad;..\..\db\dbc\ms_win;$(BCB)\lib\obj;$(BCB)\lib;$(DEBUGLIBPATH) \
+  -I"..\..\..\program files\borland\cbuilder3\projects";..\..\dbtest;..\..\mad;..\..\db\dbc\ms_win;$(BCB)\include;$(BCB)\include\vcl \
+  -$Y -$W -$O- -v -JPHN -M
+RFLAGS = -i"..\..\..\program files\borland\cbuilder3\projects";..\..\dbtest;..\..\mad;..\..\db\dbc\ms_win;$(BCB)\include;$(BCB)\include\vcl
+AFLAGS = /i..\..\dbtest /i..\..\mad /i..\..\db\dbc\ms_win /i$(BCB)\include /i$(BCB)\include\vcl /mx /w2 /zi
+LFLAGS = -L"..\..\..\program files\borland\cbuilder3\projects";..\..\dbtest;..\..\mad;..\..\db\dbc\ms_win;$(BCB)\lib\obj;$(BCB)\lib;$(DEBUGLIBPATH) \
+  -ap -Tpe -x -Gn -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0x32.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1026
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=Executable (Console)
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Excluded Packages]
+C:\Program Files\Borland\CBuilder3\Bin\rcexpert.bpl=Borland Resource Expert
+C:\Program Files\Borland\CBuilder3\Bin\dcltee35.bpl=Borland TeeChart Components
+C:\Program Files\Borland\CBuilder3\Bin\dclint35.bpl=Borland International Tools
+C:\Program Files\Borland\CBuilder3\Bin\dcldss35.bpl=Borland Decision Cube Components
+C:\Program Files\Borland\CBuilder3\Bin\dclnet35.bpl=Borland Internet Components
+C:\Program Files\Borland\CBuilder3\Bin\dclmid35.bpl=Borland Midas Components
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

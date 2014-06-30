@@ -1,0 +1,63 @@
+###########################
+#                         #
+#   CGI_Core  Version 3   #
+#                         #
+###########################
+
+include ../Makedef
+include ../db/Makefile.dbc
+
+THE_TARGET=	core3
+INSTALL_DIR=	out
+
+all:
+	$(MAKE_LIBMAD)
+	$(MAKE_LIBA_DBC)
+	cd mod; make
+	make $(THE_TARGET)
+
+clr:
+	rm -f *.o
+	rm -f *.a
+	rm -f *.so
+	rm -f *~
+	cd mod/;	make clr
+
+clean:
+	make clr
+	$(CLEAN_LIBMAD)
+	$(CLEAN_LIBA_DBC)
+
+main.o: main.cpp parser.h VERSION.h modules.h config.h	\
+	http.i.cpp stat.i.cpp arg.i.cpp paranoid.i.cpp
+	$(CC) main.cpp -D__USER__=\"$(USER)\"
+
+parser.o: parser.cpp parser.h modules.h config.h
+	$(CC) parser.cpp
+
+macrocodereplacer.o: macrocodereplacer.cpp macrocodereplacer.h
+	$(CC) macrocodereplacer.cpp
+
+modules.o: modules.cpp modules.h
+	$(CC) modules.cpp
+
+$(THE_TARGET): main.o macrocodereplacer.o parser.o modules.o
+	$(LINK_TARGET)	main.o			\
+			macrocodereplacer.o	\
+			parser.o		\
+			modules.o		\
+			-L. -lcgi_core_modules	\
+			-la_dbc -lmad $(DBC_LIB)
+
+install:
+	#first make all
+	make all
+	
+	#first strip
+	$(STRIP) $(THE_TARGET)
+	
+	#then copy
+	cp $(THE_TARGET) $(INSTALL_DIR)
+	if [ -f libcgi_core_modules.so ] ; then 		\
+		cp libcgi_core_modules.so $(SHAREDLIBDIR) ;	\
+	fi

@@ -1,0 +1,5 @@
+DBC_NAME=dyna
+
+#no libs, except dynamic loader
+
+DBC_LIB= -ldl

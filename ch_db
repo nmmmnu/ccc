@@ -1,0 +1,71 @@
+#!/bin/sh
+
+cat ./mad_logo
+
+########################################
+#                                      #
+#  This file is part of Makefile that  #
+#  change target of A_DBC programs     #
+#                                      #
+########################################
+
+#============================================	
+
+case $# in
+0) 
+
+	echo "Usage:"
+	echo "	ch_db [database]"
+	echo "where [database] is:"
+	echo " 1.	bde  -- avail in WINDOWS version only"
+	echo " 2.	mfc  -- avail in WINDOWS version only"
+	echo " 3.	fake => fake database connector"
+	echo " 4.	msql => mini SQL"
+	echo " 5.	mysql=> My SQL"
+	echo " 6.	pgsql=> PostGre SQL"
+	echo " 7.	bsql => Beagle SQL (not stable tested)"
+	echo " 8.	mdbms=> MDBMS SQL Server"
+	echo " 9.	ibase=> Borland Interbase (ver 4.0 for UNIX and Win_32)"
+	echo "10.	ix   => Informix (ESQL/C)"
+	echo
+	echo "11.	dyna => Dynamic loader"
+	echo
+
+	exit 1;
+	
+esac
+
+#============================================	
+
+DB=$1
+
+echo Preparing $DB database version
+
+ln -sf make/Makefile.dbc.$DB		db/Makefile.dbc
+ln -sf dbc/${DB}_dbc.cpp		db/a_dbc.cpp
+
+#------------------------------
+#The 99% of UNIX databases uses:
+#------------------------------
+#   1. C/C++ encoding,
+#   2. 'xxx' symbol for quotting the strings.
+#   3. NULL keyword
+#------------------------------
+case "$DB" in
+	dyna)	ln -sf coder/a_dbc_coder_simple.cpp   db/a_dbc_coder.cpp
+		ln -sf coder/a_dbc_coder_null_no.cpp  db/a_dbc_coder_null.cpp ;;
+
+	fake)	ln -sf coder/a_dbc_coder_simple.cpp   db/a_dbc_coder.cpp
+		ln -sf coder/a_dbc_coder_null_no.cpp  db/a_dbc_coder_null.cpp ;;
+
+	*)	ln -sf coder/a_dbc_coder_cpp.cpp      db/a_dbc_coder.cpp
+		ln -sf coder/a_dbc_coder_null_std.cpp db/a_dbc_coder_null.cpp ;;
+esac
+
+#============================================
+
+#Removing & making....
+rm -f db/a_dbc.o
+rm -f db/db_encoder.o
+rm -f db/dbtest.o
+cd db;	make; cd ..

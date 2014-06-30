@@ -1,0 +1,4 @@
+#mysql native library is: 
+MySQL_Lib= /usr/local/mysql/lib/libmysqlclient.a
+DBC_LIB= $(MySQL_Lib)
+DBC_INC_DIR= /usr/local/mysql/include

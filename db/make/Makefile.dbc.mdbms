@@ -1,0 +1,8 @@
+DBC_NAME=mdbms
+
+MDBMS_DIR= /usr/local/mdbms/lib
+
+DBC_INC_DIR= -I $(MDBMS_DIR)
+
+MDBMS_Lib= $(MDBMS_DIR)/libdbms.a
+DBC_LIB= $(MDBMS_Lib)

@@ -1,0 +1,11 @@
+===========================
+XML Parsing, processing etc
+===========================
+
+1. You can escape < and >, instead &lt; and &gt;
+      <p>Wow !!! 2 + 2 \> 3</p>
+2. Parsing tag:
+   if tag is *NOT* surraunded with ", it;s processed to space
+      <p align = hell"o >
+   if tag *IS* surraunded with ", it;s processed, and preformed escape \"
+      <p align = "hell\"o" >

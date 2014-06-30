@@ -1,0 +1,10 @@
+This is a simple test program for using A_DBC
+					Nikolay
+
+ * dbtest.cpp is an new version that shows how you
+may develop and use Windows ODBC DSN like files.
+
+ * dbtest.old.cpp is an old version, but it shows
+how to use properties object without external text
+file
+					Nikolay

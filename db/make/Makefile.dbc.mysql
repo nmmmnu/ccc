@@ -1,0 +1,12 @@
+DBC_NAME=mysql
+
+#mysql native library is: 
+MySQL_BASE= /usr/local/mysql
+#MySQL_BASE= /usr/local/mysql-3.22.30-pc-linux-gnu-i686
+#MySQL_BASE= /usr/local/my
+
+
+MySQL_Lib=$(MySQL_BASE)/lib/libmysqlclient.a
+DBC_LIB= $(MySQL_Lib)
+
+DBC_INC_DIR= -I $(MySQL_BASE)/include

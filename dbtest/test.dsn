@@ -1,0 +1,10 @@
+#DATABASEDRIVER	/usr/local/lib/a_dbc/mysql_dbc.so
+#DATABASEDRIVER	/usr/local/lib/a_dbc/pgsql_dbc.so
+#DATABASEDRIVER	/usr/local/lib/a_dbc/mdbms_dbc.so
+#DATABASEUSER	system
+#DATABASE	proba
+DATABASE	database.db
+
+#This is not part of DSN...
+#EXEC_SQL	update hora set num = 0 where num = 0
+#SELECT_SQL	select * from hora

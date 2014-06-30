@@ -1,0 +1,80 @@
+================================================
+INFORMIX DRIVER FOR ABSTRACT DATA BASE CONNECTOR
+================================================
+
+1. Informix ESQL/C info
+
+ o Driver was developed using free Informix ESQL/C on Linux (7.24.UC5)
+
+ o The file "informix/ix_dbc.esql.ec" must be processed with esql/c,
+   before compilation. This may be done with `make informix'
+
+ o Because the driver source is C++, actually it is ESQL/C hack.
+   This include C++ like comments, sometimes `unsigned' keyword,
+   C++ classes... etc.
+
+2. Informix link libraies
+
+Informix link libraies varring between diferent versions of ESQL/C
+To get list for your system try:
+	`esql -libs'
+
+We recommend that you check this and then compare it with the file:
+	`make/Makefile.dbc.ix'
+
+3. Limitations: SIZE
+
+Because ESQL/C works with fixed types actually my ESQL (7.24.UC5) uses 
+sizeof(), we need to make some restrictions about field length. I deside that
+following restrictions (marked by `a_dbc') are enought:
+
++---------------+--------------------+------+------------+
+| Description   | Intenal C++ source | Len  | Limit from |
++---------------+--------------------+------+------------+
+| database name | DB_BUFF_SIZE       |    30| Informix   |
+| SQL len       | SQL_BUFF_SIZE      |  10KB| a_dbc      |
+| field name len| FIELDNAME_BUFF_SIZE|    40| Informix   |
+| max field len | FIELD_BUFF_SIZE    |  10KB| a_dbc (*)  |
++---------------+--------------------+------+------------+
+                       (*) Informix SE record len is 32KB
+
+Remark:
+   Limitations may be changed with editing file "informix/ix_dbc.esql.ec"
+
+4. Limitations: TRIM
+
+A_DBC always will trim_right your fields!!!
+Remark:
+   Trimming right is removing all spaces from right side of a string:
+
+void trim_right(char *s){
+   for(size_t i = strlen(s) - 1 - 1; i > 0; i--)
+      if (s[i] == ' ')
+         s[i]='\0';
+      else
+         return;
+} //trim_right
+
+Remark:
+   This limitation may be changed with editing file "informix/ix_dbc.esql.ec",
+   but we do not recomend that you doing this, because Informix will made len
+   to be equal to sizeof() field buffer FIELD_BUFF_SIZE (e.g. 10KB!!!:)
+
+   Another way is to hack source and write some code for fixing field value
+   sizes to their actual sizes (e.g. xx for `char(xx)'). Unfortunately this is 
+   much complicated and less useful and sureless (is there word as this:).
+
+const char *IxDBC::getFieldData(unsigned int no){
+...
+if (len + 1 < FIELD_BUFF_SIZE) //Do we need of this `if'?
+   data[len + 1]='\0';
+...
+}
+
+5. Limitations: BLOb's
+
+The libary DO NOT recognize correct Informix BLOb types (SQLTEXT, SQLBYTES).
+This is because small part of Informix ESQL/C file (BLOb's memory rediector) 
+is not included in driver. (Do this for homework if you need it).
+
+This is NOT a BIG problem since a_dbc not have any special support for BLOb's

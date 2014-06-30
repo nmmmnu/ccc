@@ -1,0 +1,4 @@
+DBC_INC_DIR= /root/mdbms/lib/
+
+MDBMS_Lib= $(DBC_INC_DIR)libdbms.a
+DBC_LIB= $(MDBMS_Lib)

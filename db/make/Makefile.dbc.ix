@@ -1,0 +1,19 @@
+DBC_NAME=ix
+
+#IMPOTANT REMARK:
+#===============
+#
+#DBC_LIB varring between diferent versions of ESQL/C
+#to get list for your system try:
+#	`esql -libs'
+#
+
+DBC_LIB= -L ${INFORMIXDIR}/lib -L ${INFORMIXDIR}/lib/esql	\
+	-lixsql -lixasf -lixgen -lixos -lixgls	\
+	/usr/local/informix//lib/libnetstub.so	\
+	-lm /usr/local/informix//lib/esql/checkapi.o	\
+	-lixglx
+
+DBC_INC_DIR= -I ${INFORMIXDIR}/incl -I ${INFORMIXDIR}/incl/esql
+
+DATABASE_SPECIFIC_CMD= cd informix; make

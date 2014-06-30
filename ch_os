@@ -1,0 +1,40 @@
+#!/bin/sh
+
+cat ./mad_logo
+
+########################################
+#                                      #
+#  This file is part of Makefile that  #
+#  change target of MAD Soft programs  #
+#                                      #
+########################################
+
+#============================================	
+
+case $# in
+0) 
+
+	echo "Usage:"
+	echo "	ch_os [operation_system]"
+	echo "where [operation_system] is:"
+	echo "	win    -- (see WINDOWS version)"
+	echo "	linux  -> Linux"
+	echo "	freebsd-> Free BSD"
+#	echo "	dec    -> Digital UNIX"
+#	echo "	hpux   -> HPUX"
+#	echo "	sco    -> Santa Crus Operation"
+	echo "	ansi   -> Any 100% POSIX/ANSI compatible OS"
+
+	exit 1;
+
+esac
+
+#============================================	
+
+OS=$1
+
+#============================================	
+
+echo Preparing $OS version
+
+#============================================	

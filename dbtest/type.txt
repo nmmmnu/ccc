@@ -1,0 +1,12 @@
+no	name
+1	Newest
+2	Icons and Religious
+3	Old artists paintings
+4	Still Life
+5	Landscapes
+6	Flowers
+7	Sailboats/Sailing ships
+8	Towns pictures
+9	Animal and hunting paintings
+10	Covers
+11	Pillows

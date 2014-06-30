@@ -1,0 +1,49 @@
+###########################
+#                         #
+#   CGI_Core3 - modules   #
+#                         #
+###########################
+
+include ../../Makedef
+
+all_mod=	cpy null shell pipe pipe2 include define if db	\
+		meta type for					\
+								\
+		demo version
+
+mod_lib=	../libcgi_core_modules
+
+all:
+	all_obj=;					\
+	for MNAME in $(all_mod); do			\
+		export MNAME;				\
+		make module.$$MNAME.o;			\
+		all_obj="$$all_obj module.$$MNAME.o";	\
+	done;						\
+							\
+	export all_obj;					\
+	make $(LIBRARYTYPE)
+
+clean:
+	rm -f *.o
+	rm -f *.a
+	rm -f *~
+
+shared:
+	make $(mod_lib).so
+	make static
+
+static:
+	make $(mod_lib).a
+
+$(mod_lib).so: $(all_obj)
+	$(LD_SO) $(mod_lib).so $(all_obj)
+
+$(mod_lib).a: $(all_obj)
+	$(ARC)   $(mod_lib).a  $(all_obj)
+
+modules.h: ../modules.h ../parser.h
+	touch modules.h
+
+module.$(MNAME).o: module.$(MNAME).h module.$(MNAME).cpp modules.h
+	$(CC) module.$(MNAME).cpp

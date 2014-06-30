@@ -1,0 +1,19 @@
+
+
+-----------------------------------------------------
+********************** WARNING **********************
+-----------------------------------------------------
+   You desided to make MAD libraries as shaed objects.
+The libraries are instaled in your $(SHAREDLIBDIR)
+directory (You may change it with editing ../Makedef
+file). You need to configure your shared object loader
+(possible editing /etc/ld.so.conf and then launching
+ldconfig or setting $LD_LIBRARY_PATH).
+   All executables that using mad libraries, will
+required the those shared files:
+	$(SHAREDLIBDIR)/libmad.so
+	$(SHAREDLIBDIR)/libmad.so.*
+
+-----------------------------------------------------
+
+

@@ -1,0 +1,44 @@
+#This is the Makefile enviroment
+
+#THE_TARGET= Your Target
+
+USER= "`whoami`@`hostname -f`"
+#Following is for BSD
+#USER= "`whoami`@`hostname`"
+
+#Base dir
+BASEDIR=/root/ccc
+LIBDIR=$(BASEDIR)/lib
+
+#Any strange libs you need...
+STRANGE_LIBS=
+
+CPPLIB= -lstdc++
+#CPPLIB= -lm
+
+GCC= gcc -Wall -W -Wtraditional -O9 -I $(BASEDIR)
+#GCC= gcc -Wall -W -Wtraditional -Wwrite-strings -Wmissing-prototypes
+
+CC= $(GCC) -c
+LINK= $(GCC) $(CPPLIB) $(STRANGE_LIBS) -L $(LIBDIR) -o
+LINK_TARGET= $(LINK) $(THE_TARGET)
+AR= ar
+ARC= $(AR) rc
+STRIP= strip
+
+#This is the names of MAD Soft support libraryes...
+LIBMAD=		$(LIBDIR)/libmad.a
+LIBA_DBC=	$(LIBDIR)/liba_dbc.a
+LIBXML=		$(LIBDIR)/libxml.a
+LIBEXPR=	$(LIBDIR)/libexpr.a
+
+#This is Making of the MAD Soft support libraryes...
+MAKE_LIBMAD=	cd $(BASEDIR)/mad;	make
+MAKE_LIBA_DBC=	cd $(BASEDIR)/db;	make
+MAKE_LIBXML=	cd $(BASEDIR)/xml;	make
+MAKE_LIBEXPR=	cd $(BASEDIR)/expr;	make
+
+CLEAN_LIBMAD=	cd $(BASEDIR)/mad;	make clean
+CLEAN_LIBA_DBC=	cd $(BASEDIR)/db;	make clean
+CLEAN_LIBXML=	cd $(BASEDIR)/xml;	make clean
+CLEAN_LIBEXPR=	cd $(BASEDIR)/expr;	make clean

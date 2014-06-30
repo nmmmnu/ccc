@@ -1,0 +1,69 @@
+======================
+A_DBC History Archives
+======================
+02.2000
+    Dyna Driver (Dynamic LD library support for UNIX systems)
+01.2000
+    MFC ODBC driver
+    Fixing exec() and getAffectedCount() for Informix
+    Informix driver
+12.1999
+    Added BDE username/password support
+    Added `extern const char *' with drivername, copy etc.
+    Fixed core dump in fake_dbc
+09.1999
+    Added DataBase sensetive encoding... again :)
+07.1999
+    Added Postgres user and password...
+    Added 'ADD RECORD' support to Fake_DBC
+05-06.1999
+    Maded A_DBC II - New big changes in A_DBC idea:
+       (*) api now are much, much simplier
+       (*) no field types
+       (*) removed data encoding (the end user must care about it,
+           I know this is not too good)
+       (*) field data get (not with Propeties)
+    Borland InterBase Driver (Very terrible story:)
+
+04.1999
+    Fixed a 'First Record' number BUG in PostGre
+
+03.1999
+    FIXED A OLD BUG WITH INCLUDE (with PostGre) !!!
+       (*) it was one non inicialised variable :(((
+    Added data encoding
+
+02.1999
+    Added "AFFECTED" row information function
+    Fixed bug in BDE version
+
+01.1999
+    Beagle SQL Driver (not tested)
+    MDBMS Driver
+    A_DBC interface is split from CGI_Core
+    A_DBC in the internet under GPL (Yeeeee!)
+    Great changes in A_DBC idea:
+       (*) Still OOP (Yeeeee!)
+       (*) No more code in header files (Yeeeee!)
+       (*) a_dbc.cpp symlink
+       (*) "distributive" linking (Yeeeee!)
+    
+12.1998
+    MySQL database driver
+
+10 - 11.1998
+    Linux CGI_Core version OK
+    'Fake' database driver
+    mSQL database driver
+    PostGreSQL database driver
+
+09.1998
+    Borland C++ Builder Program CGI_Core (first A_DBC was part of it:)
+    Borland Database Engine Driver
+    GCC Linux Program CGI_Core!!!
+
+A long era and time ago (07 - 08.1998:)
+   There are ODBC and BDE under Windows,
+   There are JDBC under JVM (Java),
+   WHY THERE AREN'T ONE REALLY GOOD DB STANDARD UNDER UNIX?!?!?!?!?!?!?!
+   

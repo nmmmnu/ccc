@@ -1,0 +1,95 @@
+###########################
+#                         #
+#   CGI_Core3 - modules   #
+#                         #
+###########################
+
+include ../../Makedef
+
+all: ../modules.a
+#../modules.so
+
+clean:
+	rm -f *.o
+	rm -f *.a
+	rm -f *~
+
+all_obj=	module.cpy.o		\
+		module.null.o		\
+		module.shell.o		\
+		module.pipe.o		\
+		module.pipe2.o		\
+		module.include.o	\
+		module.define.o		\
+		module.if.o		\
+		module.db.o		\
+		module.meta.o		\
+		module.type.o		\
+		module.for.o		\
+					\
+		module.demo.o		\
+		module.version.o
+
+all_mod=	cpy null shell pipe pipe2 include define if db	\
+		meta type for					\
+								\
+		demo version
+
+#../modules.a: $(all_obj) modules.o
+#	$(ARC) ../modules.a $(all_obj) modules.o
+#modules.o: ../modules.cpp ../modules.i.cpp ../modules.h
+#	$(CC) ../modules.cpp
+
+../modules.so: $(all_obj)
+	$(LD_SO) ../modules.so $(all_obj)
+
+../modules.a: $(all_obj)
+	$(ARC) ../modules.a $(all_obj)
+
+modules.h: ../modules.h ../parser.h
+	touch modules.h
+
+module.$(MNAME).o: module.$(MNAME).h module.$(MNAME).cpp modules.h
+	$(CC) module.$(MNAME).cpp
+
+module.null.o: module.null.h module.null.cpp modules.h
+	$(CC) module.null.cpp
+
+module.cpy.o: module.cpy.h module.cpy.cpp modules.h
+	$(CC) module.cpy.cpp
+
+module.version.o: module.version.h module.version.cpp modules.h
+	$(CC) module.version.cpp
+
+module.demo.o: module.demo.h module.demo.cpp modules.h
+	$(CC) module.demo.cpp
+
+module.shell.o: module.shell.h module.shell.cpp modules.h
+	$(CC) module.shell.cpp
+
+module.pipe.o: module.pipe.h module.pipe.cpp modules.h
+	$(CC) module.pipe.cpp
+
+module.pipe2.o: module.pipe2.h module.pipe2.cpp modules.h
+	$(CC) module.pipe2.cpp
+
+module.include.o: module.include.h module.include.cpp modules.h
+	$(CC) module.include.cpp
+
+module.define.o: module.define.h module.define.cpp modules.h
+	$(CC) module.define.cpp
+
+module.if.o: module.if.h module.if.cpp modules.h separator_helper.i.cpp
+	$(CC) module.if.cpp
+
+module.db.o: module.db.h module.db.cpp modules.h separator_helper.i.cpp
+	$(CC) module.db.cpp
+
+module.meta.o: module.meta.h module.meta.cpp modules.h
+	$(CC) module.meta.cpp
+
+module.type.o: module.type.h module.type.cpp modules.h
+	$(CC) module.type.cpp
+
+module.for.o: module.for.h module.for.cpp modules.h
+	$(CC) module.for.cpp

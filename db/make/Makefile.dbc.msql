@@ -1,0 +1,6 @@
+DBC_NAME=msql
+
+#msql native library is: 
+mSQL_Lib= /usr/local/Minerva/lib/libmsql.a
+DBC_LIB= $(mSQL_Lib)
+DBC_INC_DIR= -I /usr/local/Minerva/include

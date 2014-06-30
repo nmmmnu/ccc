@@ -1,0 +1,6 @@
+DBC_NAME=ibase
+
+#Interbase native library is:
+IBaseSQL_Lib= /usr/interbase/lib/gds.a
+DBC_LIB= $(IBaseSQL_Lib)
+DBC_INC_DIR= -I /usr/interbase/include/

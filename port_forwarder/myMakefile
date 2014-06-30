@@ -1,0 +1,2 @@
+all:
+	gcc -g portfw.cpp -o portfw -I../ -L../lib -lmad
